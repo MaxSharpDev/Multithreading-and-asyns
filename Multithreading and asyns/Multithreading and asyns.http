@@ -1,0 +1,6 @@
+@Multithreading_and_asyns_HostAddress = http://localhost:5296
+
+GET {{Multithreading_and_asyns_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
