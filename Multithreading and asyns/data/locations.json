@@ -1,0 +1,16 @@
+﻿{
+  "Locations": [
+    {
+      "UserId": 1,
+      "LocationName": "Saint - Petersburg"
+    },
+    {
+      "UserId": 2,
+      "LocationName": "Perm"
+    }
+    {
+      "UserId": 3,
+      "LocationName": "Moscow"
+    }
+  ]
+}

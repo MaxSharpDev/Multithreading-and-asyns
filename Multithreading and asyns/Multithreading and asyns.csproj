@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="data\games.json" />
+    <Content Remove="data\locations.json" />
+    <Content Remove="data\users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="data\locations.json" />
+    <Compile Include="data\users.json" />
+    <Compile Include="data\games.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
