@@ -6,7 +6,7 @@ namespace Multithreading_and_asyns.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserInfoSynsController : ControllerBase
+    public class UserInfoAsynsOldController : ControllerBase
     {
         private const string USER_FILE_PATH = "data/user/json";
         private const string LOCATION_FILE_PATH = "data/locations/json";
@@ -24,17 +24,33 @@ namespace Multithreading_and_asyns.Controllers
             return Ok(new { userId, location, game });
         }
 
-        private int GetRandomUserId()
+        private Task GetRandomUserId()
         {
             Console.WriteLine("Полученное сообщение");
-            var userJson = System.IO.File.ReadAllText(USER_FILE_PATH);
-            Task.Delay(1000).Wait();
-            Console.WriteLine("Сообщение получено");
-            var userData = JsonSerializer.Deserialize<UserData>(userJson);
 
-            return userData.Users.First().Id;
+            var result = Task.Run(() =>
+            {
+                var userJsonTask = System.IO.File.ReadAllTextAsync(USER_FILE_PATH);
+                Task.Delay(300).Wait();
+
+                return userJsonTask;
+            });
+            result.ContinueWith(resultTaks =>
+            {
+                var userData = JsonSerializer.Deserialize<UserData>(resultTaks.Result)
+                ?? throw new NullReferenceException();
+            });
+
+            Console.WriteLine("Сообщение получено");
+
+            var userData = JsonSerializer.Deserialize<UserData>(result.Result)
+            ?? throw new NullReferenceException();
+
+            return Task.FromResult(userData.Users.First().Id);
+
+
         }
-        private string GetUserLocation(int userId)
+        private Task GetUserLocation(int userId)
         {
             Console.WriteLine("Получена локация");
             var locationJson = System.IO.File.ReadAllText(LOCATION_FILE_PATH);
@@ -45,7 +61,7 @@ namespace Multithreading_and_asyns.Controllers
             return locationDate.Locations.First(l => l.UserId == userId).LocationName;
 
         }
-        private string GetUserFavoriteGame(int userId)
+        private Task GetUserFavoriteGame(int userId)
         {
             Console.WriteLine("Получена игра");
             var gameJson = System.IO.File.ReadAllText(GAMES_FILE_PATH);

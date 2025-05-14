@@ -2,15 +2,15 @@
   "Locations": [
     {
       "UserId": 1,
-      "LocationName": "Saint - Petersburg"
+      "LocationName": "New York"
     },
     {
       "UserId": 2,
       "LocationName": "Perm"
-    }
+    },
     {
       "UserId": 3,
-      "LocationName": "Moscow"
+      "LocationName": "Sant - Petersburg"
     }
   ]
-}
+};

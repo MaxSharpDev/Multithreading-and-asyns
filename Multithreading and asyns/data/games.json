@@ -1,4 +1,4 @@
-﻿{
+﻿const data = {
     "Games": [
         {
             "UserId": 1,
@@ -13,4 +13,6 @@
             "FavoriteGames": "Minecraft"
         }
     ]
-}
+};
+
+console.log(data.Games[0].FavoriteGames); 
